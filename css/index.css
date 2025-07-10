@@ -1,0 +1,74 @@
+*,
+*::before,
+*::after {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.body {
+  background-color: #0d0a0b;
+  color: #FFFFFF;
+}
+
+.nav {
+  margin: 0.5rem 0 0 0;
+  padding: 0.8rem 0 0 0;
+  display: flex;
+  justify-content: space-between;
+  height: 3.5rem;
+}
+
+.right {
+  display: flex;
+  gap: 1rem;
+}
+
+.title {
+  padding: 0.8rem;
+}
+
+.login-button {
+  padding: 0.8rem 0 0.8rem 0.8rem;
+}
+
+.sign-up-button {
+  padding: 0.8rem;
+  background-color: #ed254e;
+  border-radius: 1.5rem;
+  height: max-content;
+}
+
+.input-field {
+  background-color: black;
+  color: #FFFFFF;
+  padding: 0.4rem 0.8rem;
+  margin: 1rem;
+  border-radius: 5px;
+}
+
+table {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr {
+  display: table-row;
+}
+
+td,
+th {
+  display: table-cell;
+}
+
+.url {
+  text-decoration: underline;
+  color: rgb(0, 0, 255);
+}
+
+.url:visited {
+  text-decoration: underline;
+  color: rgb(128, 0, 128);
+}
+
+/*# sourceMappingURL=index.css.map */
