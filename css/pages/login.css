@@ -1,17 +1,134 @@
-/* Error: expected "}".
- *     ,
- * 166 |   }
- *     |    ^
- *     '
- *   scss/pages/login.scss 166:4  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: 'Error: expected "}".\a     \2577 \a 166 \2502    }\a     \2502     ^\a     \2575 \a   scss/pages/login.scss 166:4  root stylesheet';
+.body {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+.body .login {
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+.body .login .container {
+  background-color: #e5e5e5;
+  padding: 2rem;
+  display: flex;
+  border-radius: 4rem;
+}
+.body .login .login-page {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.0509803922), rgba(255, 255, 255, 0.0509803922));
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  --webkit-backdrop-filter: blur(5px);
+}
+.body .login .login-page .login-title {
+  font-size: 3rem;
+  padding: 0rem 0 2rem 0;
+}
+.body .login .login-page .login-label {
+  color: black;
+}
+.body .login .login-page .btn-row {
+  width: 10rem;
+}
+.body .login .login-submit-button {
+  background-color: black;
+  width: 20rem;
+  margin: 0.2rem;
+  padding: 0.6rem;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 0 0;
+}
+.body .login .bg-o {
+  z-index: -1;
+  font-size: 80rem;
+  position: absolute;
+  overflow: hidden;
+}
+.body .login .top {
+  top: -70%;
+  left: 50%;
+}
+.body .login .bottom {
+  top: 20%;
+  left: 0%;
+}
+.body .login .tl {
+  top: -85%;
+  left: -23%;
+}
+.body .login .br {
+  top: 50%;
+  left: 80%;
+}
+.body .login .login-hero-image {
+  position: relative;
+}
+.body .login .login-hero-image .hero-image-text {
+  padding: 0 0 1rem 2rem;
+  position: absolute;
+  font-weight: bold;
+  font-size: 1.4rem;
+  top: 88.42%;
+  left: -0.56%;
+  z-index: 2;
+  transform: scaleY(1.4);
+}
+.body .login .login-hero-image .hero-image {
+  overflow: hidden;
+  width: 20rem;
+  height: 30rem;
+  object-fit: cover;
+  opacity: 0.8;
+  margin: 0 2rem 0 0;
+  border-radius: 2.8rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .body .container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .body .container .login-hero-image {
+    display: flex;
+    justify-content: center;
+    width: 40vw;
+    height: 40vh;
+  }
+  .body .container .login-hero-image .hero-image {
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+  }
+  .body .container .login-page {
+    width: 100%;
+    display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .body .container .login-page .input-field-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .body .container .login-page .input-field-form label {
+    font-weight: bold;
+  }
+  .body .container .login-page .margin-top {
+    margin: 0.6rem 0 0 0;
+  }
+}
+
+/*# sourceMappingURL=login.css.map */
