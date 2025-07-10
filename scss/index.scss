@@ -1,0 +1,75 @@
+@use "styles/index" as *;
+
+*,
+*::before,
+*::after {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.body {
+  background-color: $primary-background;
+  color: $white;
+}
+
+.nav {
+  margin: $margin-nav 0 0 0;
+  padding: $padding-signUp 0 0 0;
+  display: flex;
+  justify-content: space-between;
+  height: $height-nav;
+}
+
+.right {
+  display: flex;
+  gap: 1rem;
+}
+
+.title {
+  padding: $padding-signUp;
+}
+
+.login-button {
+  padding: $padding-signUp 0 $padding-signUp $padding-signUp;
+}
+
+.sign-up-button {
+  // padding:$padding-signUp;
+  padding: $padding-signUp;
+  background-color: $primary-frontend-background;
+  border-radius: $border-radius-signUp;
+  height: max-content;
+}
+
+.input-field {
+  background-color: black;
+  color: $white;
+  padding: 0.4rem 0.8rem;
+  margin: $input-margin;
+  border-radius: 5px;
+}
+
+table {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr {
+  display: table-row;
+}
+
+td,
+th {
+  display: table-cell;
+}
+
+.url {
+  text-decoration: underline;
+  color: $url-unvisited;
+}
+
+.url:visited {
+  text-decoration: underline;
+  color: $url-visited;
+}
