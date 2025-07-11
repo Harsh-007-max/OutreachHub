@@ -1,0 +1,165 @@
+@use "../styles/index" as *;
+@use "sass:color";
+
+* {
+  all: unset;
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  overflow: hidden;
+  width: auto;
+  height: auto;
+}
+
+.body {
+  font-family: "Arial Black", sans-serif;
+  background-color: $background;
+  color: $on-surface;
+  height: 100vh;
+
+  // nav-start
+  .nav {
+    position: sticky;
+    top: 0px;
+    height: $nav-height;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: red;
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin: 0 0 0 1rem;
+
+      .title {
+        font-size: 1.5rem;
+        transform: scaleY(1.2);
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      .sign-up-button {
+        // @include brutalist-button;
+        margin: 0 1rem 0 0;
+        @include pill-button-style(
+          $primary-color: $primary-color,
+          $on-primary: $on-primary,
+          $hover-color: color.scale($primary-color, $lightness: -5%),
+          $active-color: color.scale($primary-color, $lightness: -10%)
+        );
+      }
+    }
+  }
+
+  // container-start
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    // background-color: red;
+    justify-content: center;
+    align-items: center;
+
+    .title {
+      margin-top: calc($nav-height + 10%);
+      display: flex;
+      width: 90%;
+      flex-direction: column;
+    }
+
+    .title h1 {
+      font-size: 2rem;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      margin-top: calc($nav-height + $submenu-height);
+      background-color: purple;
+      width: 90%;
+      height: 95%;
+
+      .submenu {
+        background-color: green;
+        flex: 1;
+        width: 100%;
+        min-height: $submenu-height;
+      }
+
+      .content {
+        flex: 2;
+        margin: 10px;
+        width:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:1rem;
+        flex-wrap: wrap;
+
+        .card {
+          max-width:30%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          width: auto;
+          height: 40vw;
+          width: 35%;
+          background-color: red;
+
+          .card-image {
+            width: 80%;
+          }
+
+          .card-body {
+            display: block;
+            width: auto;
+            height: auto;
+            padding: 0.4rem;
+
+            .card-title {
+              display: block;
+              width: auto;
+              height: auto;
+            }
+
+            .card-text {
+              display: block;
+              width: auto;
+              height: auto;
+
+              .line {
+                display: block;
+                width: auto;
+                height: auto;
+              }
+            }
+
+            .button {
+              padding: 0.2rem;
+            }
+
+            .edit {
+              background-color: blue;
+            }
+
+            .delete {
+              background-color: red;
+            }
+          }
+        }
+      }
+    }
+  }
+}
