@@ -39,11 +39,13 @@
 
 // bootstrap breakpoints
 $breakpoints: (
+  extra-small: 460px,
   small: 576px,
   medium: 768px,
   large: 992px,
   extra-large: 1200px,
   extra-extra-large: 1440px,
+  large-xxxl:1800px
 );
 
 @mixin responsive($breakpoint-name) {

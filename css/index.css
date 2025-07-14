@@ -4,6 +4,7 @@
 }
 
 .body {
+  font-family: "Arial Black", sans-serif;
   background-color: #ffffff;
   color: #000000;
 }
@@ -12,7 +13,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: red;
 }
 .body .nav .left {
   display: flex;

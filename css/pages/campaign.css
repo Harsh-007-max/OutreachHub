@@ -1,17 +1,158 @@
-/* Error: Undefined variable.
- *    ,
- * 87 |       margin-top: calc($nav-height + $submenu-height);
- *    |                                      ^^^^^^^^^^^^^^^
- *    '
- *   scss/pages/campaign.scss 87:38  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Undefined variable.\a    \2577 \a 87 \2502        margin-top: calc($nav-height + $submenu-height);\a    \2502                                       ^^^^^^^^^^^^^^^\a    \2575 \a   scss/pages/campaign.scss 87:38  root stylesheet";
+* {
+  all: unset;
+  box-sizing: border-box;
 }
+
+img {
+  display: block;
+  overflow: hidden;
+  width: auto;
+  height: auto;
+}
+
+.body {
+  font-family: "Arial Black", sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  height: 100vh;
+}
+.body .nav {
+  position: sticky;
+  top: 0px;
+  height: 5vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: red;
+}
+.body .nav .left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 0 0 0 1rem;
+}
+.body .nav .left .title {
+  font-size: 1.5rem;
+  transform: scaleY(1.2);
+}
+.body .nav .right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.body .nav .right .sign-up-button {
+  margin: 0 1rem 0 0;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background-color: #e200ee;
+  color: #ffffff;
+  font-weight: bold;
+  border: none;
+}
+.body .nav .right .sign-up-button:hover {
+  background-color: rgb(214.7, 0, 226.1);
+  cursor: pointer;
+}
+.body .nav .right .sign-up-button:active {
+  background-color: rgb(203.4, 0, 214.2);
+}
+.body .container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.body .container .title {
+  margin-top: calc(5vh + 10%);
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+}
+.body .container .title h1 {
+  font-size: 2rem;
+}
+.body .container .main-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: calc(5vh + 5%);
+  background-color: purple;
+  width: 90%;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.body .container .main-content .submenu {
+  position: sticky;
+  top: 0px;
+  background-color: green;
+  flex: 1;
+  width: 100%;
+  min-height: 5%;
+  max-height: 5%;
+}
+.body .container .main-content .content {
+  padding: 1rem;
+  margin-top: 5%;
+  flex: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.body .container .main-content .content .card {
+  max-width: 22%;
+  min-width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 40vw;
+  width: 35%;
+  background-color: red;
+}
+.body .container .main-content .content .card .card-image {
+  width: 80%;
+}
+.body .container .main-content .content .card .card-body {
+  display: block;
+  width: auto;
+  height: auto;
+  padding: 0.4rem;
+}
+.body .container .main-content .content .card .card-body .card-title {
+  display: block;
+  width: auto;
+  height: auto;
+}
+.body .container .main-content .content .card .card-body .card-text {
+  display: block;
+  width: auto;
+  height: auto;
+}
+.body .container .main-content .content .card .card-body .card-text .line {
+  display: block;
+  width: auto;
+  height: auto;
+}
+.body .container .main-content .content .card .card-body .button {
+  padding: 0.2rem;
+}
+.body .container .main-content .content .card .card-body .edit {
+  background-color: blue;
+}
+.body .container .main-content .content .card .card-body .delete {
+  background-color: red;
+}
+@media (max-width: 1440px) {
+  .body .container .main-content .content .card {
+    max-width: 22%;
+    min-width: 20%;
+  }
+}
+
+/*# sourceMappingURL=campaign.css.map */

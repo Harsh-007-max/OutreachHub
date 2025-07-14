@@ -1,11 +1,13 @@
 @use "../styles/index" as *;
 @use "sass:color";
 
-html,body{
-  overflow:hidden;
-  margin:0;
-  padding:0;
+html,
+body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
+
 .background-layer {
   position: fixed;
   width: 100vw;
@@ -22,7 +24,7 @@ html,body{
   position: fixed; // important change!
   font-size: 80vw;
   font-weight: 900;
-  font-family: 'Arial Black', sans-serif;
+  font-family: "Arial Black", sans-serif;
   color: rgba(0, 0, 0, 0.09);
   user-select: none;
   pointer-events: none;
@@ -30,24 +32,92 @@ html,body{
   line-height: 1;
 }
 
-.tl{
-  top:-80%;
-  left:-30%;
+.tl {
+  top: -80%;
+  left: -30%;
 }
-.tr{
-  top:-70%;
-  left:70%;
+
+.tr {
+  top: -70%;
+  left: 70%;
 }
-.br{
-  top:50%;
-  right:-27%;
+
+.br {
+  top: 50%;
+  right: -27%;
 }
-.bl{
-  top:40%;
-  left:-20%;
+
+.bl {
+  top: 40%;
+  left: -20%;
 }
+
+@include responsive(extra-large) {
+  .tl {
+    top: -50%;
+    left: -30%;
+  }
+
+  .tr {
+    top: -50%;
+    left: 65%;
+  }
+}
+
+@include responsive(medium) {
+  .tl {
+    top: -35%;
+    left: -30%;
+  }
+
+  .tr {
+    top: -30%;
+    left: 65%;
+  }
+
+  .br {
+    top: 60%;
+    right: -27%;
+  }
+
+  .bl {
+    top: 60%;
+    left: -30%;
+  }
+}
+
+@include responsive(small) {
+
+  .tl,
+  .tr,
+  .bl,
+  .br {
+    font-size: 50rem;
+  }
+
+  .tl {
+    top: -25%;
+    left: -30%;
+  }
+
+  .tr {
+    top: -30%;
+    left: 65%;
+  }
+
+  .br {
+    top: 40%;
+    right: -50%;
+  }
+
+  .bl {
+    top: 70%;
+    left: -40%;
+  }
+}
+
 .body {
-  position:relative;
+  position: relative;
   z-index: 100;
   display: flex;
   justify-content: center;
@@ -63,6 +133,7 @@ html,body{
     border-radius: $signup-card-border-radius;
     background-color: $background;
     width: 50vw;
+    max-width:1500px;
 
     .signup-title h1 {
       transform: scaleY(1.2);
@@ -132,6 +203,10 @@ html,body{
       }
     }
 
+    @include responsive(large-xxxl) {
+      width: 45vw;
+    }
+
     @include responsive(extra-large) {
       flex-direction: column;
       width: 50vw;
@@ -164,6 +239,26 @@ html,body{
         .hero-image {
           width: 100%;
           height: auto;
+        }
+      }
+    }
+
+    @include responsive(small) {
+      .hero-image-section {
+        margin: 0rem;
+
+        .hero-image {
+          height: 100%;
+        }
+      }
+    }
+
+    @include responsive(extra-small) {
+      .hero-image-section {
+        margin: 0rem;
+
+        .hero-image {
+          height: 100%;
         }
       }
     }
