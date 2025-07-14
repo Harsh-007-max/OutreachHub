@@ -1,9 +1,12 @@
 //color palette
-$primary-color: #e200ee;
+// $primary-color: #e200ee;
+$primary-color: #3caf50;
 $primary-variant: #3700b3;
 $secondary-color: #03dac6;
 $secondary-variant: #018786;
 $background: #ffffff;
+$background-color: #f9f9f9;
+$secondary-background:#efeded;
 $surface: #ffffff;
 $error: #b00020;
 $on-primary: #ffffff;
@@ -12,7 +15,8 @@ $on-background: #000000;
 $on-surface: #000000;
 $on-error: #ffffff;
 $warning: #ffde03;
-
+$text-color:#333;
+$lignt-text-color:#555555;
 // nav
 $nav-height: 5vh;
 
@@ -23,3 +27,22 @@ $login-card-padding: 2rem;
 // signup page variables
 $signup-card-border-radius: 3.5rem;
 $signup-card-padding: 2rem;
+
+// campagen page submenu
+$submenu-height: 5%;
+$sidebar-border-radius: 2rem;
+$sidebar-image-padding:1%;
+$focus-padding:1%;
+
+//card 
+$card-max-width: 22%;
+$card-min-width:30%;
+
+//button primary
+$primary-button-bg-color:#2196f3;
+$danger-button-bg-color:#f44336;
+
+
+//chip 
+$chip-bg:#e0f7fa;
+$chip-color: #00796b;

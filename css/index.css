@@ -4,46 +4,52 @@
 }
 
 .body {
+  font-family: "Arial Black", sans-serif;
   background-color: #ffffff;
   color: #000000;
 }
-.body .nav {
-  height: 5vh;
+
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: red;
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-.body .nav .left {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin: 0 0 0 1rem;
-}
-.body .nav .left .title {
-  font-size: 1.5rem;
-  transform: scaleY(1.2);
-}
-.body .nav .right {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-.body .nav .right .sign-up-button {
-  margin: 0 1rem 0 0;
-  padding: 0.5rem 1rem;
-  border-radius: 1rem;
-  background-color: #e200ee;
-  color: #ffffff;
+nav .left {
   font-weight: bold;
-  border: none;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: rgb(60, 122.5, 70.8695652174);
 }
-.body .nav .right .sign-up-button:hover {
-  background-color: rgb(214.7, 0, 226.1);
+nav .right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+nav .right .nav-link {
+  text-decoration: none;
+  color: black;
+}
+nav .right a {
   cursor: pointer;
+  color: #555;
 }
-.body .nav .right .sign-up-button:active {
-  background-color: rgb(203.4, 0, 214.2);
+nav .right a:last-child {
+  background-color: #3caf50;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+nav .right a:last-child:hover {
+  background-color: rgb(60, 157.5, 76.9565217391);
 }
 
 /*# sourceMappingURL=index.css.map */

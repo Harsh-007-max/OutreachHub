@@ -7,40 +7,93 @@
 }
 
 .body {
+  font-family: "Arial Black", sans-serif;
   background-color: $background;
   color: $on-surface;
 
-  .nav {
-    height: $nav-height;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: red;
-    .left {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin: 0 0 0 1rem;
+  // .nav {
+  //   height: $nav-height;
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   // background-color: red;
+  //   .left {
+  //     display: flex;
+  //     align-items: center;
+  //     gap: 2rem;
+  //     margin: 0 0 0 1rem;
 
-      .title{
-        font-size: 1.5rem;
-        transform:scaleY(1.2);
-      }
+  //     .title{
+  //       font-size: 1.5rem;
+  //       transform:scaleY(1.2);
+  //     }
+  //   }
+
+  //   .right {
+  //     display: flex;
+  //     align-items: center;
+  //     gap: 2rem;
+
+  //     .sign-up-button {
+  //       // @include brutalist-button;
+  //       margin:0 1rem 0 0;
+  //       @include pill-button-style($primary-color: $primary-color,
+  //         $on-primary: $on-primary,
+  //         $hover-color: color.scale($primary-color,  $lightness:-5%),
+  //         $active-color: color.scale($primary-color,  $lightness:-10%));
+  //     }
+  //   }
+  // }
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $background;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .left {
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: none;
+
+    color: color.scale($primary-color, $blackness: 30%);
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .nav-link {
+      text-decoration: none;
+      color: black;
     }
 
-    .right {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
+    a {
+      cursor: pointer;
+      color: #555;
 
-      .sign-up-button {
-        // @include brutalist-button;
-        margin:0 1rem 0 0;
-        @include pill-button-style($primary-color: $primary-color,
-          $on-primary: $on-primary,
-          $hover-color: color.scale($primary-color,  $lightness:-5%),
-          $active-color: color.scale($primary-color,  $lightness:-10%));
+      &:last-child {
+        background-color: $primary-color;
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 100px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: color.scale($primary-color, $blackness: 10%)
+        }
       }
     }
   }
+
+
 }
