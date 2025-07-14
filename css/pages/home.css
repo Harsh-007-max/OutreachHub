@@ -126,48 +126,42 @@ body {
   width: 100%;
   overflow-x: hidden;
 }
-.body .nav {
-  position: sticky;
-  top: 0px;
-  height: 5vh;
+.body nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  background-color: #000000;
-  color: white;
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-.body .nav .left {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin: 0 0 0 1rem;
-}
-.body .nav .left .title {
+.body nav .left {
+  font-weight: bold;
   font-size: 1.5rem;
-  transform: scaleY(1.2);
-  font-weight: bold;
+  color: rgb(60, 122.5, 70.8695652174);
 }
-.body .nav .right {
+.body nav .right {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
-.body .nav .right .sign-up-button {
-  margin: 0 1rem 0 0;
-  padding: 0.5rem 1rem;
-  border-radius: 1rem;
-  background-color: #e200ee;
-  color: #ffffff;
-  font-weight: bold;
-  border: none;
-}
-.body .nav .right .sign-up-button:hover {
-  background-color: rgb(214.7, 0, 226.1);
+.body nav .right span {
   cursor: pointer;
+  color: #555;
 }
-.body .nav .right .sign-up-button:active {
-  background-color: rgb(203.4, 0, 214.2);
+.body nav .right span:last-child {
+  background-color: #3caf50;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.body nav .right span:last-child:hover {
+  background-color: rgb(60, 157.5, 76.9565217391);
 }
 .body .container {
   display: flex;
@@ -178,14 +172,14 @@ body {
   align-items: center;
   margin-bottom: 10vw;
 }
-.body .container .title {
-  margin-top: calc(5vh + 2%);
+.body .container .container-title {
+  margin-top: calc(5vh + 10%);
   display: flex;
   width: 90%;
   flex-direction: column;
   font-weight: bold;
 }
-.body .container .title h1 {
+.body .container .container-title h1 {
   font-size: 2rem;
 }
 .body .container .main-content {

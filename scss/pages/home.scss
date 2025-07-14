@@ -142,46 +142,49 @@ body {
   width: 100%;
   overflow-x: hidden;
 
-  // nav-start
-  .nav {
-    position: sticky;
-    top: 0px;
-    height: $nav-height;
+  nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    background-color: $on-background;
-    color: white;
+    background-color: $background;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 
     .left {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin: 0 0 0 1rem;
-
-      .title {
-        font-size: 1.5rem;
-        transform: scaleY(1.2);
-        font-weight: bold;
-      }
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: color.scale($primary-color, $blackness: 30%);
     }
 
     .right {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
 
-      .sign-up-button {
-        // @include brutalist-button;
-        margin: 0 1rem 0 0;
-        @include pill-button-style($primary-color: $primary-color,
-          $on-primary: $on-primary,
-          $hover-color: color.scale($primary-color, $lightness: -5%),
-          $active-color: color.scale($primary-color, $lightness: -10%));
+      span {
+        cursor: pointer;
+        color: #555;
+
+        &:last-child {
+          background-color: $primary-color;
+          color: white;
+          padding: 0.4rem 1rem;
+          border-radius: 100px;
+          font-weight: bold;
+          transition: background-color 0.3s;
+
+          &:hover {
+            background-color: color.scale($primary-color, $blackness: 10%)
+          }
+        }
       }
     }
   }
+
 
   // container-start
   .container {
@@ -192,17 +195,17 @@ body {
     // background-color: red;
     justify-content: center;
     align-items: center;
-    margin-bottom:10vw;
+    margin-bottom: 10vw;
 
-    .title {
-      margin-top: calc($nav-height + 2%);
+    .container-title {
+      margin-top: calc($nav-height + 10%);
       display: flex;
       width: 90%;
       flex-direction: column;
       font-weight: bold;
     }
 
-    .title h1 {
+    .container-title h1 {
       font-size: 2rem;
     }
 
