@@ -1,5 +1,7 @@
 const apiURL = "https://6874f40add06792b9c9604b4.mockapi.io/mock/Campaign";
 const campaignContainer = document.getElementsByClassName("main-content")[0];
+const campaignForm = document.getElementById("campaign-form");
+const campaignFormDiv = document.getElementById("campaign-form-div");
 let campaigns = [];
 const templateFillerMulti = (data) => {
   const template = document.createElement("div");
@@ -16,11 +18,9 @@ const templateFillerMulti = (data) => {
             </div>
             <div class="line">
               <label class="card-label">Duration:</label>
-              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${
-    dateFormatter(
-      data.CampaignEndDate,
-    )
-  }</span>
+              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${dateFormatter(
+                data.CampaignEndDate,
+              )}</span>
             </div>
             <div class="line">
               <label class="card-label">Tags:</label>
@@ -71,6 +71,25 @@ const getAllCampaigns = async () => {
     });
   }
 };
+const getCampaignById = async (id) => {
+  let campaign = "";
+  try {
+    await fetch(apiURL + `/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        campaign = data;
+      });
+  } catch (error) {
+    console.log(`Error while calling api:${error}`);
+  } finally {
+    if (campaign === "") {
+      console.log("No campaign found with the given ID.");
+      return { error: "No campaign found" };
+    } else {
+      return campaign;
+    }
+  }
+};
 const deleteCampaignById = async (id) => {
   try {
     await fetch(apiURL + `/${id}`, { method: "DELETE" })
@@ -98,12 +117,13 @@ campaignContainer.addEventListener("click", async (e) => {
   const editButton = e.target.closest(".edit.button")
     ? "Edit"
     : e.target.closest(".delete.button")
-    ? "Delete"
-    : null;
+      ? "Delete"
+      : null;
   if (editButton === "Edit") {
     const editButton = e.target.closest(".edit.button");
     const id = editButton.dataset.id;
     console.log(`Edit button id: ${id}`);
+    editCampaignById(id);
   } else if (editButton === "Delete") {
     const deleteButton = e.target.closest(".delete.button");
     const id = deleteButton.dataset.id;
@@ -114,4 +134,25 @@ campaignContainer.addEventListener("click", async (e) => {
     }
   }
 });
+campaignForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  window.location.href = "./campaigns.html";
+});
+const editCampaignById = async (id) => {
+  toggleForm();
+  campaignForm.reset();
+  const campaign = await getCampaignById(id);
+  campaignForm.img.src = campaign.CampaignBanner;
+  campaignForm.CampaignBanner.value = campaign.CampaignBanner;
+  campaignForm.CampaignTitle.value = campaign.CampaignTitle;
+  campaignForm.CampaignStatus.value = campaign.CampaignStatus;
+  campaignForm.CampaignStartDate.value = campaign.CampaignStartDate;
+  campaignForm.CampaignEndDate.value = campaign.CampaignEndDate;
+  campaignForm.CampaignTags.value = campaign.CampaignTags;
+  campaignForm.CampaignDescription.value = campaign.CampaignDescription;
+};
+const toggleForm = () => {
+  campaignFormDiv.classList.toggle("display-none");
+  document.body.classList.toggle("no-scroll");
+};
 getAllCampaigns();
