@@ -195,7 +195,9 @@ nav {
   width: calc(23.3% - 1vw);
   min-width: 25vh;
   flex-direction: column;
-  height: 25%;
+  height: 30vh;
+  min-height: 30vh;
+  max-height:30vh;
 
   .hero-image {
     height: 150px;
@@ -248,6 +250,7 @@ nav {
     }
 
     .card-description {
+      flex:2;
       scrollbar-width: none;
       scroll-behavior: smooth;
       display: block;
