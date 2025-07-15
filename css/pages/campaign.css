@@ -172,9 +172,8 @@ nav .nav-link {
   width: calc(23.3% - 1vw);
   min-width: 25vh;
   flex-direction: column;
-  height: 30vh;
+  height: 31vh;
   min-height: 30vh;
-  max-height: 30vh;
 }
 .card .hero-image {
   height: 150px;
@@ -219,6 +218,9 @@ nav .nav-link {
   border-radius: 100px;
   font-size: 0.9rem;
   color: #00796b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .card .card-body .card-description {
   flex: 2;
@@ -306,6 +308,7 @@ nav .nav-link {
   }
   .card {
     width: 100%;
+    height: 32vh;
   }
 }
 @media (max-width: 460px) {

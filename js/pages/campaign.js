@@ -16,10 +16,11 @@ const templateFillerMulti = (data) => {
             </div>
             <div class="line">
               <label class="card-label">Duration:</label>
-              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${dateFormatter(
-    data.CampaignEndDate,
-  )
-    }</span>
+              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${
+    dateFormatter(
+      data.CampaignEndDate,
+    )
+  }</span>
             </div>
             <div class="line">
               <label class="card-label">Tags:</label>
@@ -97,8 +98,8 @@ campaignContainer.addEventListener("click", async (e) => {
   const editButton = e.target.closest(".edit.button")
     ? "Edit"
     : e.target.closest(".delete.button")
-      ? "Delete"
-      : null;
+    ? "Delete"
+    : null;
   if (editButton === "Edit") {
     const editButton = e.target.closest(".edit.button");
     const id = editButton.dataset.id;
@@ -108,7 +109,7 @@ campaignContainer.addEventListener("click", async (e) => {
     const id = deleteButton.dataset.id;
     console.log(`Delete button id: ${id}`);
 
-    if (confirm("Are you sure you want to delete: ")) {
+    if (confirm("Are you sure you want to delete this campaign? ")) {
       await deleteCampaignById(id);
     }
   }

@@ -59,7 +59,6 @@ body {
   left: -20%;
 }
 
-
 body {
   background-color: $background-color;
   color: $text-color;
@@ -105,7 +104,7 @@ nav {
         transition: background-color 0.3s;
 
         &:hover {
-          background-color: color.scale($primary-color, $blackness: 10%)
+          background-color: color.scale($primary-color, $blackness: 10%);
         }
       }
     }
@@ -177,8 +176,8 @@ nav {
     flex-wrap: wrap;
     gap: 20px;
     // justify-content: flex-start;
-    justify-content:center;
-    align-items:center;
+    justify-content: center;
+    align-items: center;
     height: auto;
   }
 }
@@ -195,15 +194,16 @@ nav {
   width: calc(23.3% - 1vw);
   min-width: 25vh;
   flex-direction: column;
-  height: 30vh;
+  height: 31vh;
   min-height: 30vh;
-  max-height:30vh;
 
   .hero-image {
     height: 150px;
     width: 100%;
     background-color: #ccc;
-    transition: height 0.4s ease, opacity 0.4s ease;
+    transition:
+      height 0.4s ease,
+      opacity 0.4s ease;
     object-fit: cover;
 
     img {
@@ -222,7 +222,7 @@ nav {
     flex: 1;
     padding: 1rem;
     overflow: hidden;
-
+    
     h5 {
       font-size: 1.2rem;
       margin-bottom: 1rem;
@@ -246,11 +246,14 @@ nav {
         border-radius: 100px;
         font-size: 0.9rem;
         color: $chip-color;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
 
     .card-description {
-      flex:2;
+      flex: 2;
       scrollbar-width: none;
       scroll-behavior: smooth;
       display: block;
@@ -260,7 +263,9 @@ nav {
       opacity: 0;
       max-height: 0;
       overflow-y: auto;
-      transition: opacity 0.4s ease, max-height 0.4s ease;
+      transition:
+        opacity 0.4s ease,
+        max-height 0.4s ease;
     }
 
     .card-actions {
@@ -274,7 +279,12 @@ nav {
       visibility: hidden;
       height: 0;
       overflow: hidden;
-      transition: opacity 0.4s ease, height 0.4s ease, padding 0.4s ease, margin 0.4s ease, border 0.4s ease;
+      transition:
+        opacity 0.4s ease,
+        height 0.4s ease,
+        padding 0.4s ease,
+        margin 0.4s ease,
+        border 0.4s ease;
 
       .button {
         text-decoration: none;
@@ -296,12 +306,12 @@ nav {
           background-color: $danger-button-bg-color;
 
           &:hover {
-            background-color: color.scale($danger-button-bg-color, $blackness: 10%);
+            background-color: color.scale($danger-button-bg-color,
+                $blackness: 10%);
           }
         }
       }
     }
-
   }
 
   &:hover {
@@ -355,6 +365,7 @@ nav {
 
   .card {
     width: 100%;
+    height:32vh;
   }
 }
 

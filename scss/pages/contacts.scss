@@ -1,0 +1,323 @@
+@use "../styles/index" as *;
+@use "sass:color";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+html,
+body {
+  // overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.background-layer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.bg-X,
+.bg-O {
+  position: fixed;
+  font-size: 80vw;
+  font-weight: 900;
+  font-family: "Arial Black", sans-serif;
+  color: rgba(0, 0, 0, 0.09);
+  user-select: none;
+  pointer-events: none;
+  z-index: -1;
+  line-height: 1;
+}
+
+.tl {
+  top: -80%;
+  left: -30%;
+}
+
+.tr {
+  top: -70%;
+  left: 70%;
+}
+
+.br {
+  top: 50%;
+  right: -30%;
+}
+
+.bl {
+  top: 40%;
+  left: -20%;
+}
+
+body {
+  background-color: $background-color;
+  color: $text-color;
+}
+
+main {
+  padding: 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $background;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .left {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: color.scale($primary-color, $blackness: 30%);
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    a {
+      cursor: pointer;
+      color: #555;
+
+      &:last-child {
+        background-color: $primary-color;
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 100px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: color.scale($primary-color, $blackness: 10%);
+        }
+      }
+    }
+  }
+
+  .nav-link {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.container {
+  margin-top: 20px;
+
+  .main-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    // justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: $background;
+  border-radius: 1rem;
+  box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  width: calc(23.3% - 1vw);
+  min-width: 40vh;
+  flex-direction: column;
+  height: 30vh;
+  min-height: 30vh;
+
+  .hero-image {
+    height: 150px;
+    width: 100%;
+    background-color: #ccc;
+    transition:
+      height 0.4s ease,
+      opacity 0.4s ease;
+    object-fit: cover;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: margin 0.4s ease;
+    flex: 1;
+    padding: 1rem;
+    overflow: hidden;
+
+    h5 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: color.scale($primary-color, $blackness: 30%);
+    }
+
+    .line {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.2rem;
+
+      .card-label {
+        font-weight: bold;
+        width: 5rem;
+        color: #555;
+      }
+
+      .chip {
+        background-color: $chip-bg;
+        padding: 0.1rem 0.2rem;
+        border-radius: 100px;
+        font-size: 0.9rem;
+        color: $chip-color;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .card-description {
+      flex: 2;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+      display: block;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      color: $text-color;
+      opacity: 0;
+      max-height: 0;
+      overflow-y: auto;
+      transition:
+        opacity 0.4s ease,
+        max-height 0.4s ease;
+    }
+
+    .card-actions {
+      display: flex;
+      padding: 0;
+      margin-top: 0;
+      border-top: 0;
+      gap: 1rem;
+      background-color: $background;
+      opacity: 0;
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
+      transition:
+        opacity 0.4s ease,
+        height 0.4s ease,
+        padding 0.4s ease,
+        margin 0.4s ease,
+        border 0.4s ease;
+
+      .button {
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        color: white;
+        font-size: 0.9rem;
+        transition: background-color 0.2s;
+
+        &.edit {
+          background-color: $secondary-color;
+
+          &:hover {
+            background-color: color.scale($secondary-color, $blackness: 10%);
+          }
+        }
+
+        &.delete {
+          background-color: $danger-button-bg-color;
+
+          &:hover {
+            background-color: color.scale($danger-button-bg-color,
+                $blackness: 10%);
+          }
+        }
+      }
+    }
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+
+    .hero-image {
+      height: 0;
+      opacity: 0;
+    }
+
+    .card-body {
+
+      h5,
+      .line {
+        margin-bottom: 0.2rem;
+      }
+    }
+
+    .card-description {
+      opacity: 1;
+      max-height: 120px;
+    }
+
+    .card-actions {
+      opacity: 1;
+      visibility: visible;
+      height: auto;
+      padding: 1rem 1.5rem;
+      margin-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+  }
+}
+
+@include responsive(medium) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .container .main-content {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
+
+@include responsive(extra-small) {
+  nav {
+    flex-direction: column;
+  }
+}
