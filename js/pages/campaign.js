@@ -1,6 +1,8 @@
 const apiURL = "https://6874f40add06792b9c9604b4.mockapi.io/mock/Campaign";
 const campaignContainer = document.getElementsByClassName("main-content")[0];
-
+const campaignForm = document.getElementById("campaign-form");
+const campaignFormDiv = document.getElementById("campaign-form-div");
+let campaigns = [];
 const templateFillerMulti = (data) => {
   const template = document.createElement("div");
   template.innerHTML = `
@@ -16,7 +18,13 @@ const templateFillerMulti = (data) => {
             </div>
             <div class="line">
               <label class="card-label">Duration:</label>
-              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${dateFormatter(data.CampaignEndDate)}</span>
+              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${dateFormatter(
+                data.CampaignEndDate,
+              )}</span>
+            </div>
+            <div class="line">
+              <label class="card-label">Tags:</label>
+              <span class="chip">${data.CampaignTags}</span>
             </div>
             <div class="card-description">
               <p>
@@ -41,7 +49,6 @@ const dateFormatter = (date) => {
 };
 const getAllCampaigns = async () => {
   console.log("Campaign module loaded");
-  let campaigns = [];
   campaignContainer.innerHTML = "Loading...";
   let message = "";
   try {
@@ -64,7 +71,48 @@ const getAllCampaigns = async () => {
     });
   }
 };
-campaignContainer.addEventListener("click", (e) => {
+const getCampaignById = async (id) => {
+  let campaign = "";
+  try {
+    await fetch(apiURL + `/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        campaign = data;
+      });
+  } catch (error) {
+    console.log(`Error while calling api:${error}`);
+  } finally {
+    if (campaign === "") {
+      console.log("No campaign found with the given ID.");
+      return { error: "No campaign found" };
+    } else {
+      return campaign;
+    }
+  }
+};
+const deleteCampaignById = async (id) => {
+  try {
+    await fetch(apiURL + `/${id}`, { method: "DELETE" })
+      .then((res) => console.log(res))
+      .catch((err) => console.log("error in api call: ", err));
+    campaigns = campaigns.filter((campaign) => {
+      if (campaign.id) console.log(campaign);
+      return campaign.id != id;
+    });
+    if (campaigns.length === 0) {
+      campaignContainer.innerHTML = "No campaigns available.";
+      return;
+    } else {
+      campaignContainer.innerHTML = "";
+      campaigns.forEach((campaign) => {
+        campaignContainer.appendChild(templateFillerMulti(campaign));
+      });
+    }
+  } catch (error) {
+    console.log("Error while calling api:", error);
+  }
+};
+campaignContainer.addEventListener("click", async (e) => {
   e.preventDefault();
   const editButton = e.target.closest(".edit.button")
     ? "Edit"
@@ -75,10 +123,36 @@ campaignContainer.addEventListener("click", (e) => {
     const editButton = e.target.closest(".edit.button");
     const id = editButton.dataset.id;
     console.log(`Edit button id: ${id}`);
+    editCampaignById(id);
   } else if (editButton === "Delete") {
     const deleteButton = e.target.closest(".delete.button");
     const id = deleteButton.dataset.id;
     console.log(`Delete button id: ${id}`);
+
+    if (confirm("Are you sure you want to delete this campaign? ")) {
+      await deleteCampaignById(id);
+    }
   }
 });
+campaignForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  window.location.href = "./campaigns.html";
+});
+const editCampaignById = async (id) => {
+  toggleForm();
+  campaignForm.reset();
+  const campaign = await getCampaignById(id);
+  campaignForm.img.src = campaign.CampaignBanner;
+  campaignForm.CampaignBanner.value = campaign.CampaignBanner;
+  campaignForm.CampaignTitle.value = campaign.CampaignTitle;
+  campaignForm.CampaignStatus.value = campaign.CampaignStatus;
+  campaignForm.CampaignStartDate.value = campaign.CampaignStartDate;
+  campaignForm.CampaignEndDate.value = campaign.CampaignEndDate;
+  campaignForm.CampaignTags.value = campaign.CampaignTags;
+  campaignForm.CampaignDescription.value = campaign.CampaignDescription;
+};
+const toggleForm = () => {
+  campaignFormDiv.classList.toggle("display-none");
+  document.body.classList.toggle("no-scroll");
+};
 getAllCampaigns();

@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title></title>
   <link rel="stylesheet" href="../../css/pages/campaign.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=close" />
 </head>
 
 <body class="body">
@@ -43,6 +45,69 @@
       <div class="main-content"></div>
     </div>
   </main>
+  <div class="form display-none" id="campaign-form-div">
+    <form method="POST" id="campaign-form">
+      <div class="top">
+        <span class="title">Edit Form</span>
+        <button type="button" onclick="toggleForm()" class="close-button close">
+          <span class="material-symbols-outlined"> close </span>
+        </button>
+      </div>
+      <div class="main">
+        <div class="side">
+          <img src="" name="img" class="form-image" alt="" />
+        </div>
+        <div class="main-form">
+          <fieldset>
+            <label class="form-label" for="CampaignBanner">Campaign Banner:</label>
+            <input class="form-input" type="text" name="CampaignBanner" id="CampaignBanner"
+              placeholder="Enter Campaign Banner URL" />
+          </fieldset>
+          <fieldset>
+            <label class="form-label" for="CampaignTitle">Campaign Title:</label>
+            <input class="form-input" type="text" name="CampaignTitle" id="CampaignTitle"
+              placeholder="Enter Campaign Title" />
+          </fieldset>
+          <fieldset>
+            <label for="CampaignStatus" class="form-label">Campaign Status:</label>
+            <select name="CampaignStatus" class="form-dropdown" id="CampaignStatus">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Draft">Draft</option>
+              <option value="Completed">Completed</option>
+              <option value="Upcoming">Upcoming</option>
+            </select>
+          </fieldset>
+          <div class="grp">
+            <fieldset>
+              <label class="form-label" for="CampaignStartDate">Campaign Start Date:</label>
+              <input class="form-input-grp" type="datetime-local" name="CampaignStartDate" id="CampaignStartDate"
+                placeholder="Enter Campaign Start Date" />
+            </fieldset>
+            <fieldset>
+              <label class="form-label" for="CampaignEndDate">Campaign End Date:</label>
+              <input class="form-input-grp" type="datetime-local" name="CampaignEndDate" id="CampaignEndDate"
+                placeholder="Enter Campaign End Date" />
+            </fieldset>
+          </div>
+          <fieldset>
+            <label class="form-label" for="CampaignTags">Campaign Tags:</label>
+            <input class="form-input" type="text" name="CampaignTags" id="CampaignTags"
+              placeholder="Enter Campaign Tag" />
+          </fieldset>
+          <fieldset>
+            <label class="form-label" for="CampaignDescription">Campaign Description:</label>
+            <input class="form-input" type="text" name="CampaignDescription" id="CampaignDescription"
+              placeholder="Enter Campaign Description" />
+          </fieldset>
+        </div>
+      </div>
+      <div class="bottom">
+        <button class="submit-btn" type="submit">Submit</button>
+        <!-- <button class="submit-btn" type="button">Submit</button> -->
+      </div>
+    </form>
+  </div>
   <script src="../../js/pages/campaign.js"></script>
 </body>
 
