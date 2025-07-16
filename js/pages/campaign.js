@@ -3,6 +3,8 @@ const campaignContainer = document.getElementsByClassName("main-content")[0];
 const campaignForm = document.getElementById("campaign-form");
 const campaignFormDiv = document.getElementById("campaign-form-div");
 let campaigns = [];
+let cardToEdit = "";
+let isAdd = true;
 const templateFillerMulti = (data) => {
   const template = document.createElement("div");
   template.innerHTML = `
@@ -18,9 +20,11 @@ const templateFillerMulti = (data) => {
             </div>
             <div class="line">
               <label class="card-label">Duration:</label>
-              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${dateFormatter(
-                data.CampaignEndDate,
-              )}</span>
+              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${
+    dateFormatter(
+      data.CampaignEndDate,
+    )
+  }</span>
             </div>
             <div class="line">
               <label class="card-label">Tags:</label>
@@ -39,6 +43,41 @@ const templateFillerMulti = (data) => {
         </div>
 `;
   return template.firstElementChild;
+};
+const editTemplateFiller = (data) => {
+  return `
+          <div class="hero-image">
+            <img src="${data.CampaignBanner}" alt="" loading="lazy" >
+          </div>
+          <div class="card-body">
+            <h5>${data.CampaignTitle}</h5>
+            <div class="line">
+              <label class="card-label">Status:</label>
+              <span class="chip">${data.CampaignStatus}</span>
+            </div>
+            <div class="line">
+              <label class="card-label">Duration:</label>
+              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${
+    dateFormatter(
+      data.CampaignEndDate,
+    )
+  }</span>
+            </div>
+            <div class="line">
+              <label class="card-label">Tags:</label>
+              <span class="chip">${data.CampaignTags}</span>
+            </div>
+            <div class="card-description">
+              <p>
+                ${data.CampaignDescription}
+              </p>
+            </div>
+            <div class="card-actions">
+              <a href="#" class="edit button" data-id="${data.id}" >Edit</a>
+              <a href="#" class="delete button" data-id="${data.id}" >Delete</a>
+            </div>
+          </div>
+`;
 };
 const dateFormatter = (date) => {
   const d = new Date(date);
@@ -117,12 +156,14 @@ campaignContainer.addEventListener("click", async (e) => {
   const editButton = e.target.closest(".edit.button")
     ? "Edit"
     : e.target.closest(".delete.button")
-      ? "Delete"
-      : null;
+    ? "Delete"
+    : null;
   if (editButton === "Edit") {
     const editButton = e.target.closest(".edit.button");
     const id = editButton.dataset.id;
     console.log(`Edit button id: ${id}`);
+    cardToEdit = e.target.closest("div .card");
+    isAdd = false;
     editCampaignById(id);
   } else if (editButton === "Delete") {
     const deleteButton = e.target.closest(".delete.button");
@@ -136,12 +177,53 @@ campaignContainer.addEventListener("click", async (e) => {
 });
 campaignForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  window.location.href = "./campaigns.html";
+  const formData = new FormData(campaignForm);
+  const data = Object.fromEntries(formData.entries());
+  console.log(`campaign form data:`, data);
+  try {
+    //edit
+    if (!isAdd) {
+      await fetch(`${apiURL}/${data.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then(() => {
+          console.log(
+            "Campaign updated successfully",
+            editTemplateFiller(data),
+          );
+          cardToEdit.innerHTML = editTemplateFiller(data);
+        })
+        .then(() => {
+          toggleForm();
+          campaignForm.reset();
+        })
+        .catch((err) =>
+          console.log(`Campaing not updated error in API: ${err}`)
+        );
+    } else {
+      await fetch(`${apiURL}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }).then(() => {
+        console.log("Campaign added successfully");
+        window.location.href = "./campaign.html";
+      });
+    }
+  } catch (err) {
+    console.log(`Error in campaign form submission: ${err}`);
+  }
+  // window.location.href = "./campaigns.html";
 });
-const editCampaignById = async (id) => {
-  toggleForm();
-  campaignForm.reset();
+const toggleForm = () => {
+  campaignFormDiv.classList.toggle("display-none");
+  document.body.classList.toggle("no-scroll");
+};
+const fillForm = async (id) => {
   const campaign = await getCampaignById(id);
+  campaignForm.id.value = campaign.id;
   campaignForm.img.src = campaign.CampaignBanner;
   campaignForm.CampaignBanner.value = campaign.CampaignBanner;
   campaignForm.CampaignTitle.value = campaign.CampaignTitle;
@@ -151,8 +233,24 @@ const editCampaignById = async (id) => {
   campaignForm.CampaignTags.value = campaign.CampaignTags;
   campaignForm.CampaignDescription.value = campaign.CampaignDescription;
 };
-const toggleForm = () => {
-  campaignFormDiv.classList.toggle("display-none");
-  document.body.classList.toggle("no-scroll");
+const addBtn = () => {
+  toggleForm();
+  document.getElementById("form-img").style.display = "none";
+  isAdd = true;
 };
+const closeBtn = () => {
+  campaignForm.reset();
+  toggleForm();
+};
+const editCampaignById = async (id) => {
+  toggleForm();
+  campaignForm.reset();
+  fillForm(id);
+};
+CampaignBanner.addEventListener("input", (e) => {
+  document.getElementById("form-img").style.display = "block";
+  if (e.data !== "") {
+    document.getElementById("form-img").setAttribute("src", e.data);
+  }
+});
 getAllCampaigns();
