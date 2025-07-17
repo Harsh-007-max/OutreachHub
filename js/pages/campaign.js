@@ -20,11 +20,9 @@ const templateFillerMulti = (data) => {
             </div>
             <div class="line">
               <label class="card-label">Duration:</label>
-              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${
-    dateFormatter(
-      data.CampaignEndDate,
-    )
-  }</span>
+              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${dateFormatter(
+    data.CampaignEndDate,
+  )}</span>
             </div>
             <div class="line">
               <label class="card-label">Tags:</label>
@@ -57,11 +55,9 @@ const editTemplateFiller = (data) => {
             </div>
             <div class="line">
               <label class="card-label">Duration:</label>
-              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${
-    dateFormatter(
-      data.CampaignEndDate,
-    )
-  }</span>
+              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${dateFormatter(
+    data.CampaignEndDate,
+  )}</span>
             </div>
             <div class="line">
               <label class="card-label">Tags:</label>
@@ -156,8 +152,8 @@ campaignContainer.addEventListener("click", async (e) => {
   const editButton = e.target.closest(".edit.button")
     ? "Edit"
     : e.target.closest(".delete.button")
-    ? "Delete"
-    : null;
+      ? "Delete"
+      : null;
   if (editButton === "Edit") {
     const editButton = e.target.closest(".edit.button");
     const id = editButton.dataset.id;
@@ -200,7 +196,7 @@ campaignForm.addEventListener("submit", async (e) => {
           campaignForm.reset();
         })
         .catch((err) =>
-          console.log(`Campaing not updated error in API: ${err}`)
+          console.log(`Campaing not updated error in API: ${err}`),
         );
     } else {
       await fetch(`${apiURL}`, {
@@ -236,6 +232,7 @@ const fillForm = async (id) => {
 const addBtn = () => {
   toggleForm();
   document.getElementById("form-img").style.display = "none";
+  campaignForm.getElementsByClassName("title")[0].innerText = "Add Form";
   isAdd = true;
 };
 const closeBtn = () => {
@@ -243,6 +240,7 @@ const closeBtn = () => {
   toggleForm();
 };
 const editCampaignById = async (id) => {
+  campaignForm.getElementsByClassName("title")[0].innerText = "Edit Form";
   toggleForm();
   campaignForm.reset();
   fillForm(id);
