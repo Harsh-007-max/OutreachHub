@@ -20,9 +20,11 @@ const templateFillerMulti = (data) => {
             </div>
             <div class="line">
               <label class="card-label">Duration:</label>
-              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${dateFormatter(
-    data.CampaignEndDate,
-  )}</span>
+              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${
+    dateFormatter(
+      data.CampaignEndDate,
+    )
+  }</span>
             </div>
             <div class="line">
               <label class="card-label">Tags:</label>
@@ -55,9 +57,11 @@ const editTemplateFiller = (data) => {
             </div>
             <div class="line">
               <label class="card-label">Duration:</label>
-              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${dateFormatter(
-    data.CampaignEndDate,
-  )}</span>
+              <span class="chip">${dateFormatter(data.CampaignStartDate)} - ${
+    dateFormatter(
+      data.CampaignEndDate,
+    )
+  }</span>
             </div>
             <div class="line">
               <label class="card-label">Tags:</label>
@@ -152,8 +156,8 @@ campaignContainer.addEventListener("click", async (e) => {
   const editButton = e.target.closest(".edit.button")
     ? "Edit"
     : e.target.closest(".delete.button")
-      ? "Delete"
-      : null;
+    ? "Delete"
+    : null;
   if (editButton === "Edit") {
     const editButton = e.target.closest(".edit.button");
     const id = editButton.dataset.id;
@@ -169,6 +173,8 @@ campaignContainer.addEventListener("click", async (e) => {
     if (confirm("Are you sure you want to delete this campaign? ")) {
       await deleteCampaignById(id);
     }
+  } else {
+    console.log("Something clicked");
   }
 });
 campaignForm.addEventListener("submit", async (e) => {
@@ -190,13 +196,19 @@ campaignForm.addEventListener("submit", async (e) => {
             editTemplateFiller(data),
           );
           cardToEdit.innerHTML = editTemplateFiller(data);
+          for (let i = 1; i < campaigns.length; i++) {
+            if (campaigns[i] && campaigns[i].id == data.id) {
+              campaigns[i] = data;
+              break;
+            }
+          }
         })
         .then(() => {
           toggleForm();
           campaignForm.reset();
         })
         .catch((err) =>
-          console.log(`Campaing not updated error in API: ${err}`),
+          console.log(`Campaing not updated error in API: ${err}`)
         );
     } else {
       await fetch(`${apiURL}`, {
@@ -211,7 +223,6 @@ campaignForm.addEventListener("submit", async (e) => {
   } catch (err) {
     console.log(`Error in campaign form submission: ${err}`);
   }
-  // window.location.href = "./campaigns.html";
 });
 const toggleForm = () => {
   campaignFormDiv.classList.toggle("display-none");

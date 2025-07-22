@@ -205,7 +205,7 @@ contactForm.addEventListener("submit", async (e) => {
         body: JSON.stringify(data),
       }).then(() => {
         console.log("Contact added successfully");
-        window.location.href = "./contact.html";
+        window.location.href = "./contacts.html";
       });
     }
   } catch (err) {
