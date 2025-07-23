@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 const userRoutes = require("./routes/user.js");
 const contactRoutes = require("./routes/contact.js");
+const workspaceRoutes = require("./routes/workspace.js");
+const tagRoutes = require("./routes/tag.js");
 mongoose
   .connect(process.env.mongo_db)
   .then(() => console.log("Connected to MongoDB Atlas"))
@@ -14,7 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/user", userRoutes);
 app.use("/contact", contactRoutes);
-
+app.use("/workspace", workspaceRoutes);
+app.use("/tag", tagRoutes);
 app.get("/", (req, res, next) => {
   res.json({ message: "Hello World!" });
 });
