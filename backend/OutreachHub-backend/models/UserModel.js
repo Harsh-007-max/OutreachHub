@@ -15,6 +15,7 @@ const userSchema = mongoose.Schema({
     },
   },
   contacts: { type: [mongoose.Schema.Types.ObjectId], default: [] ,ref:"Contact"},
+  workspaces: { type: [mongoose.Schema.Types.ObjectId], default: [] ,ref:"Workspace"},
   joinDate: { type: Date, default: Date.now },
 });
 module.exports = mongoose.model("User", userSchema);
