@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const WorkspaceSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
   creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   name: { type: String, required: true },
-  memCount: { type: Number ,default:1},
+  memCount: { type: Number, default: 1 },
   members: [
     {
       user_id: mongoose.Schema.Types.ObjectId,
