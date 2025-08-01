@@ -169,7 +169,7 @@ exports.addMemberToWorkspace = async (req, res, next) => {
           _id: req.body.memberId,
         },
         {
-          $push: { workspaces:workspaceId },
+          $push: { workspaces: workspaceId },
         },
       );
     }
@@ -329,6 +329,46 @@ exports.removeTagFromWorkspace = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: "Error removing tag from workspace",
+      error: error,
+    });
+  }
+};
+exports.updateWorkspace = async (req, res) => {
+  try {
+    const workspaceId = req.body.workspaceId;
+    if (!(await checkWorkspaceById(workspaceId))) {
+      return res.status(404).json({
+        message: "Workspace not found",
+      });
+    }
+    await checkAdminExists(req, res);
+    const updateData = {};
+    if (req.body.name) {
+      updateData.name = req.body.name;
+    }
+    if (req.body.description) {
+      updateData.description = req.body.description;
+    }
+    if (req.body.tags && Array.isArray(req.body.tags)) {
+      updateData.tags = req.body.tags;
+    }
+    const updatedWorkspace = await WorkspaceModel.findByIdAndUpdate(
+      workspaceId,
+      updateData,
+      { new: true, runValidators: true },
+    );
+    if (!updatedWorkspace) {
+      return res.status(404).json({
+        message: "Workspace not found",
+      });
+    }
+    res.status(200).json({
+      message: "Workspace updated successfully",
+      workspace: updatedWorkspace,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error updating workspace",
       error: error,
     });
   }

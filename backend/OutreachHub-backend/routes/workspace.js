@@ -14,8 +14,12 @@ router.delete(
 );
 router.delete("/delete", auth, WorkspaceController.deleteWorkspace);
 router.get("/", auth, WorkspaceController.getWorkspaceById);
-router.post("/createWorkspace", auth, WorkspaceController.createWorkspace);
 router.post("/addTags", auth, WorkspaceController.addTagToWorkspace);
+routes.patch(
+  "/updateWorkspace",
+  auth,
+  WorkspaceController.updateWorkspace,
+);
 router.delete("/removeTags", auth, WorkspaceController.removeTagFromWorkspace);
 
 module.exports = router;
