@@ -1,11 +1,25 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const WorkspaceController = require('../controllers/workspaceController.js');
-const auth = require('../middlewares/auth.js');
+const WorkspaceController = require("../controllers/workspaceController.js");
+const auth = require("../middlewares/auth.js");
 
-router.get('/', auth, WorkspaceController.getAllWorkspacesByUser);
-router.post('/create', auth, WorkspaceController.createWorkspaceByUser);
-router.post('/:workspaceId', auth, WorkspaceController.addMemberToWorkspace);
-router.delete('/:workspaceId', auth, WorkspaceController.deleteMemberFromWorkspace);
-router.get('/:workspaceId', auth, WorkspaceController.getWorkspaceById);
+router.get("/admin", auth, WorkspaceController.getAllWorkspaces);
+router.get("/user", auth, WorkspaceController.getAllWorkspacesByUserId);
+router.post("/create", auth, WorkspaceController.createWorkspace);
+router.post("/addMember", auth, WorkspaceController.addMemberToWorkspace);
+router.delete(
+  "/deleteMember",
+  auth,
+  WorkspaceController.deleteMemberFromWorkspace,
+);
+router.delete("/delete", auth, WorkspaceController.deleteWorkspace);
+router.get("/", auth, WorkspaceController.getWorkspaceById);
+router.post("/addTags", auth, WorkspaceController.addTagToWorkspace);
+routes.patch(
+  "/updateWorkspace",
+  auth,
+  WorkspaceController.updateWorkspace,
+);
+router.delete("/removeTags", auth, WorkspaceController.removeTagFromWorkspace);
+
 module.exports = router;
