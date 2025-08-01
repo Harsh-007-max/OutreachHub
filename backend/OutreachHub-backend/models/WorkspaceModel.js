@@ -1,20 +1,10 @@
 const mongoose = require("mongoose");
 const WorkspaceSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: "Admin" },
   name: { type: String, required: true },
-  memCount: { type: Number, default: 1 },
-  members: [
-    {
-      user_id: mongoose.Schema.Types.ObjectId,
-      permissions: {
-        read: { type: Boolean, default: false },
-        write: { type: Boolean, default: false },
-        allowAdd: { type: Boolean, default: false },
-      },
-      addDate: { type: Date, default: Date.now },
-    },
-  ],
+  description: { type: String, default: "" },
+  tags: { type: [String], default: [] },
   creationDate: { type: Date, default: Date.now },
 });
 
