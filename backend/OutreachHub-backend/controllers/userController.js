@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/UserModel.js");
-require("dotenv").config({ debug: true });
-
-const User = require("../models/UserModel.js");
+const WorkspaceUserModel = require("../models/WorkspaceUserModel.js");
 
 exports.user_login = (req, res, next) => {
-  User.findOne({ "contactInfo.email": req.body.contactInfo.email })
+  UserModel.findOne({
+    "contactInfo.email": req.body.email,
+  })
     .then((user) => {
       if (!user) {
         return res.status(401).json({
@@ -49,8 +49,74 @@ exports.user_login = (req, res, next) => {
       });
     });
 };
+exports.getAllWorkspaceByUserId = async (req, res, next) => {
+  try {
+    const user = await UserModel.findById(req.userData.userId, {
+      workspaces: 1,
+    }).populate("workspaces");
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+    res.status(200).json({
+      message: "Workspaces fetched successfully",
+      workspaces: user.workspaces,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Error fetching workspaces",
+      error: err,
+    });
+  }
+};
+exports.setCurrentWorkspace = async (req, res, next) => {
+  try {
+    const user = await UserModel.findById(req.userData.userId);
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    if (!req.body.workspaceId) {
+      return res.status(400).json({
+        message: "Workspace ID is required",
+      });
+    } else {
+      if (user.workspaces.includes(req.body.workspaceId)) {
+        const token = jwt.sign(
+          {
+            email: user.contactInfo.email,
+            userId: user._id,
+            workspaceId: req.body.workspaceId,
+          },
+          process.env.JWT_KEY,
+          {
+            expiresIn: "1h",
+          },
+        );
+        return res.status(200).json({
+          message: "Current workspace set successfully",
+          token: token,
+        });
+      } else {
+        return res.status(400).json({
+          message: "Workspace not found in user's workspaces",
+        });
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Error setting current workspace",
+      error: err,
+    });
+  }
+};
 exports.user_signup = (req, res, next) => {
-  User.findOne({ "contactInfo.email": req.body.contactInfo.email }).then(
+  UserModel.findOne({ "contactInfo.email": req.body.contactInfo.email }).then(
     (user) => {
       if (user) {
         return res.status(409).json({
@@ -72,7 +138,7 @@ exports.user_signup = (req, res, next) => {
                 phoneNo: req.body.contactInfo.phoneNo,
                 countryCode: req.body.contactInfo.countryCode,
               },
-              contacts: req.body.contacts || [],
+              workspaces: [],
               joinDate: new Date(),
             };
             UserModel.create(newUser)
@@ -94,19 +160,35 @@ exports.user_signup = (req, res, next) => {
     },
   );
 };
-exports.user_delete = (req, res, next) => {
-  UserModel.deleteOne({ _id: req.params.userId })
-    .then((result) => {
-      res.status(200).json({
-        message: "User deleted",
+exports.user_delete = async (req, res, next) => {
+  const userId = req.params.userId;
+  const password = req.body.password;
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
       });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
+    }
+    bcrypt.compare(password, user.password, async (err, result) => {
+      if (err || !result) {
+        return res.status(401).json({
+          message: "Auth failed",
+        });
+      }
+
+      await UserModel.deleteOne({ _id: userId });
+      await WorkspaceUserModel.deleteMany({ userId });
+      return res.status(200).json({
+        message: "User deleted successfully",
       });
     });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: err,
+    });
+  }
 };
 exports.get_user_by_id = (req, res, next) => {
   UserModel.findById(req.userData.userId, { password: 0 })
